@@ -168,7 +168,7 @@ module RBeautify
       /^ensure\b/,
       /\bwhen\b/,
       /\{[^\}]*$/,
-      # /\([^\)]*$/,
+      /\([^\)]*$/,
       /\[[^\]]*$/
    ]
 
@@ -182,7 +182,7 @@ module RBeautify
       /^else\b/,
       /\bwhen\b/,
       /^[^\{]*\}/,
-      # /^[^\(]*\)/,
+      /^[^\(]*\)/,
       /^[^\[]*\]/
    ]
 
@@ -305,6 +305,7 @@ module RBeautify
       error = false
       if(path == '-') # stdin source
          source = STDIN.read
+         source = source.split("\n")  unless source.is_a? Array
          dest,error = beautify_string(source,"stdin")
          print dest
       else # named file source
